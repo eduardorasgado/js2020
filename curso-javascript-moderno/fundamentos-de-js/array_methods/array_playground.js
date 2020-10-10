@@ -51,10 +51,20 @@ elmt = carrito.every(producto => producto.precio < 20000);
 console.log(elmt);
 
 // concat
-const meses2 = ['Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+const meses2 = ['Agosto', 'Septiembre', 'Octubre', 'Noviembre'];
 
 const monthsOfYear = meses.concat(meses2);
 console.log(monthsOfYear);
 console.log('-----------------');
 const monthsOfYear2 = [...meses, ...meses2];
 console.log(monthsOfYear2);
+
+// Spread Operator
+let monthsOfYear3 = [...monthsOfYear2, 'Diciembre'];
+console.log(monthsOfYear3);
+
+const producto = { nombre: 'Disco Duro', precio: 300 }
+
+// creates a new shopping car with new element.
+let nextCarrito = [ ...carrito, producto ]
+console.log(nextCarrito);
