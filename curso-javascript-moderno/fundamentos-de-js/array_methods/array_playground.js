@@ -36,10 +36,25 @@ let totalCarrito = carrito.reduce((total, producto) => {
 console.log(totalCarrito);
 
 // filter
-
 let expensiveCarrito = carrito.filter(producto => {
     return producto.precio > 1000;
 })
 
 console.log(expensiveCarrito);
 
+// find
+let elmt = carrito.find(producto => producto.nombre == 'Television');
+console.log(elmt);
+
+// every
+elmt = carrito.every(producto => producto.precio < 20000);
+console.log(elmt);
+
+// concat
+const meses2 = ['Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+const monthsOfYear = meses.concat(meses2);
+console.log(monthsOfYear);
+console.log('-----------------');
+const monthsOfYear2 = [...meses, ...meses2];
+console.log(monthsOfYear2);
