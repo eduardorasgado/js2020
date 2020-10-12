@@ -16,7 +16,7 @@ elements.push(document.links[0].classList)
 elements.push(document.images)
 // printing all images outer html properties
 for(let i = 0; i < elements[elements.length - 1].length; i++) {
-    console.log(elements[elements.length - 1][i].outerHTML);
+    //console.log(elements[elements.length - 1][i].outerHTML);
 }
 
-console.log(elements);
+//console.log(elements);
