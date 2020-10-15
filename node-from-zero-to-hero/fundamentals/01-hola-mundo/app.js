@@ -11,12 +11,16 @@
  *  Conexiones a bases de datos
  *  Creacion de servicios REST en segundos
  * 
- * Non blocking IO
+ *  Non blocking IO
+ * 
+ * Nodemon
+ * Instalamos nodemon para observar el comportamiento de nuestros programas mientras
+ * corren en tiempo real al momento de programar
  */
 
  let nombre = 'Eduardo'
 
- console.log(`Hola ${nombre}`);
+ console.log(`Hola ${nombre}, como estas?`);
 
  let a = 10;
  let b = 20;
