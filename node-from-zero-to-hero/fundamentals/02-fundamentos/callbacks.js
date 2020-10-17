@@ -15,7 +15,7 @@ let getUsuarioById = ( id, callback ) => {
     }
 
     // debemos manejar el retorno de un posible error en un callback
-    if(id === 20) return callback(`El usuario con el id ${id} no existe en la DB`);
+    if(id === 20) return callback(`El usuario con el id ${id} no existe en la DB`, null);
 
     return callback(null, usuario);
 
