@@ -10,7 +10,7 @@ let empleados = [
     },
     {
         id: 3,
-        nombre: 'Melisa'
+        nombre: 'Melissa'
     },
     {
         id: 4,
@@ -48,15 +48,52 @@ let getEmpleado = (id, callback) => {
     return callback(null, empleadoDB);
 };
 
+// si se encuentra el salario entonces 
+    /**
+     *  {
+     *      nombre: 'Melissa',
+     *      salario: 3000
+     * }
+     * 
+     *  No se encontro un salario para el usuario USER
+     */
+let getSalario = (empleado, callback) => {
+    let salarioEspecifico = salarios.find( salario => {
+        return  salario.id === empleado.id;
+    });
 
-let empleadoIdList = [ 1, 13, 2, 6, 3 ];
+    if(!salarioEspecifico) {
+        return callback(`No se encontro un salario para el ususario ${ empleado.nombre }`, null);
+    }
+    return callback(null, {
+        nombre: empleado.nombre,
+        salario: salarioEspecifico.salario
+    });
+}
+
+// ------------Testing functions -------------
+
+// usando la funcion getEmpleado para invocar callbacks
+let empleadoIdList = [ 1, 13, 2, 6, 3, 4 ];
 
 empleadoIdList.forEach((empleadoId) => {
     getEmpleado(empleadoId, (err, empleado) => {
+        console.log(`[ BUSCANDO EMPLEADO: ${empleadoId}  ]`);
         if(err) {
             return console.log(err);
+        } else {
+            console.log(`[ ***EMPLEADO ENCONTRADO*** ]`);
+            // en caso de encontrar al empleado entonces consultamos salario
+            getSalario(empleado, (err, empleadoNomina) => {
+                console.log(`[ BUSCANDO NOMINA DE EMPLEADO: ${empleado.nombre} ]`);
+                if(err) {
+                    return console.log(err);
+                } 
+                console.log(`[ ***NOMINA ENCONTRADA*** ]`);
+                return console.log(`NOMINA del empleado ${empleadoNomina.nombre} con salario `+
+                `${empleadoNomina.salario}`);
+            })
         }
-        return console.log(`Se ha consultado exitosamente los datos del empleado ${empleado.nombre}`);
     });
     console.log("------");
 });
