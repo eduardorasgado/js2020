@@ -1,5 +1,4 @@
-// base de datos de empleado
-exports.empleados = [
+const empleados = [
     {
         id: 1,
         nombre: 'Eduardo'
@@ -19,8 +18,7 @@ exports.empleados = [
 
 ];
 
-// base de datos de salarios de los empleados
-exports.salarios = [
+const salarios = [
     {
         id: 1,
         salario: 1000
@@ -34,3 +32,7 @@ exports.salarios = [
         salario: 1200
     },
 ];
+
+//exports.empleados = empleados;
+//exports.salarios = salarios;
+module.exports = { empleados,salarios };

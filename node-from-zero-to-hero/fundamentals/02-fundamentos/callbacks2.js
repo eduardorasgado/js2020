@@ -1,4 +1,4 @@
-import { empleados, salarios } from "./DB";
+const { empleados, salarios } = require("./DB");
 
 let getEmpleado = (id, callback) => {
     // buscamos y obtenemos un eempleado especifico

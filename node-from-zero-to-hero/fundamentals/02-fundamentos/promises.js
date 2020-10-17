@@ -1,2 +1,4 @@
 // Promesas
-import { empleados, salarios } from "./DB";
+const { empleados, salarios } = require("./DB");
+
+let perro = 1;
