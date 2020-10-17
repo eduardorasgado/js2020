@@ -9,12 +9,27 @@ let getEmpleado = (id) => {
         });
     
         if (!empleadoDB) {
-            return reject(`No existe el empleado con id ${id}`);
+            reject(`No existe el empleado con id ${id}`);
         }
         // resolve solo recibe un arumento
-        return resolve(empleadoDB);
+        resolve(empleadoDB);
     });
 };
+
+let getSalario = ( empleado ) => {
+    return new Promise( (resolve, reject) => {
+        let salarioDB = salarios.find( (salario) => salario.id === empleado.id);
+
+        if(!salarioDB) {
+            reject(`No existe el salario para el empleado ${ empleado.id }`);
+        }
+        resolve({
+            nombre: empleado.nombre,
+            salario: salarioDB.salario,
+            id: empleado.id
+        });
+    } );
+}
 
 // probando la promesa dentro de la arrow function previa
 
@@ -27,8 +42,17 @@ empleadoIdList.forEach( empleadoId => {
     getEmpleado(empleadoId)
         .then( empleado => {
             console.log(`Empleado de BD: ${empleado.nombre}`);
+            
+            getSalario(empleado)
+            .then((nomina) => {
+                console.log(nomina);
+            })
+            .catch( err => {
+                console.log("[Error de NOMINA ]");
+                console.log(err);
+            })
         })
         .catch( err => {
             console.log(err);
-        });
+        })
 });
