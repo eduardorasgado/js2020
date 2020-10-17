@@ -41,7 +41,22 @@ let getEmpleado = (id, callback) => {
         return empleado.id == id;
     } );
 
-    console.log(empleadoDB);
+    // es mas comun que nosotros trabajemos con la negacion
+    if( !empleadoDB ) {
+        return callback(`No existe un empleado con el ID ${ id }`, null);
+    } 
+    return callback(null, empleadoDB);
 };
 
-getEmpleado(2, null);
+
+let empleadoIdList = [ 1, 13, 2, 6, 3 ];
+
+empleadoIdList.forEach((empleadoId) => {
+    getEmpleado(empleadoId, (err, empleado) => {
+        if(err) {
+            return console.log(err);
+        }
+        return console.log(`Se ha consultado exitosamente los datos del empleado ${empleado.nombre}`);
+    });
+    console.log("------");
+});
