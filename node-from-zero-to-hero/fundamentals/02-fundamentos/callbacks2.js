@@ -63,15 +63,28 @@ let getSalario = (empleado, callback) => {
     });
 
     if(!salarioEspecifico) {
-        return callback(`No se encontro un salario para el ususario ${ empleado.nombre }`, null);
+        return callback(`No se encontro un salario para el usuario ${ empleado.nombre }`, null);
     }
     return callback(null, {
         nombre: empleado.nombre,
-        salario: salarioEspecifico.salario
+        salario: salarioEspecifico.salario,
+        id: empleado.id
     });
 }
 
 // ------------Testing functions -------------
+
+function callingGetSalario(empleado) {
+    getSalario(empleado, (err, empleadoNomina) => {
+        console.log(`[ BUSCANDO NOMINA DE EMPLEADO: ${empleado.nombre} ]`);
+        if(err) {
+            return console.log(err);
+        } 
+        console.log(`[ ***NOMINA ENCONTRADA*** ]`);
+        return console.log(`NOMINA del empleado ${empleadoNomina.nombre} con salario `+
+        `${empleadoNomina.salario}`);
+    })
+}
 
 // usando la funcion getEmpleado para invocar callbacks
 let empleadoIdList = [ 1, 13, 2, 6, 3, 4 ];
@@ -84,16 +97,9 @@ empleadoIdList.forEach((empleadoId) => {
         } else {
             console.log(`[ ***EMPLEADO ENCONTRADO*** ]`);
             // en caso de encontrar al empleado entonces consultamos salario
-            getSalario(empleado, (err, empleadoNomina) => {
-                console.log(`[ BUSCANDO NOMINA DE EMPLEADO: ${empleado.nombre} ]`);
-                if(err) {
-                    return console.log(err);
-                } 
-                console.log(`[ ***NOMINA ENCONTRADA*** ]`);
-                return console.log(`NOMINA del empleado ${empleadoNomina.nombre} con salario `+
-                `${empleadoNomina.salario}`);
-            })
+            callingGetSalario(empleado)
         }
     });
     console.log("------");
 });
+
