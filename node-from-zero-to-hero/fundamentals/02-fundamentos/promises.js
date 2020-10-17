@@ -42,7 +42,7 @@ empleadoIdList.forEach( empleadoId => {
     getEmpleado(empleadoId)
         .then( empleado => {
             console.log(`Empleado de BD: ${empleado.nombre}`);
-            
+
             getSalario(empleado)
             .then((nomina) => {
                 console.log(nomina);
@@ -55,4 +55,30 @@ empleadoIdList.forEach( empleadoId => {
         .catch( err => {
             console.log(err);
         })
+});
+
+// Promesas en cadena
+empleadoIdList.forEach( empleadoId => {
+    getEmpleado(empleadoId)
+        .then( empleado => {
+            console.log(`Empleado de BD: ${empleado.nombre}`);
+            // para crear funciones en cadena, cada solicitud de promesa debe
+            // retornar el resultado
+            return getSalario(empleado)
+        })
+        .then((nomina) => {
+            console.log(nomina);
+            // si queremos encadenar con otra promesa 
+            // return getOtraCosa(nomina);
+        })
+        // cuando alguna de las promesas falle en una cadena, manejamos con catch
+        .catch( err => {
+            console.log(err);
+        })
+        // encadenar promesas no permite que se maneje cada caso de error, es un caso
+        // por todos los thens
+        // .catch( err => {
+        //     console.log("[Error de NOMINA ]");
+        //     console.log(err);
+        // })
 });
