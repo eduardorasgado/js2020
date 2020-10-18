@@ -1,33 +1,30 @@
 let { empleados, salarios } = require("./DB");
 
-let getEmpleado = (id) => {
-    return new Promise( (resolve, reject) => {
-        let empleado = empleados.find( e => e.id === id);
-        if(!empleado) {
-            reject(`No se ha encontrado al empleado con id ${ id }`)
-        } else {
-            resolve(empleado);
-        }
-    } )
+let getEmpleado = async (id) => {
+    let empleado = empleados.find( e => e.id === id);
+    if(!empleado) {
+        throw new Error(`No se ha encontrado al empleado con id ${ id }`)
+    } else {
+        return empleado;
+    }
 };
 
-let getSalario = (empleado) => {
-    return new Promise( (resolve, reject) => {
-        let nomina = salarios.find( salario => empleado.id === salario.id );
+let getSalario = async (empleado) => {
+    let nomina = salarios.find( salario => empleado.id === salario.id );
 
-        if(!nomina) {
-            reject(`No se ha encontrado la nómina con id: ${ empleado.id }`);
-        } else {
-            resolve({
-                nombre: empleado.nombre,
-                salario: nomina.salario,
-                id: empleado.id
-            });
-        }
-    });
+    if(!nomina) {
+        throw new Error(`No se ha encontrado la nómina con id: ${ empleado.id }`);
+    } else {
+        return {
+            nombre: empleado.nombre,
+            salario: nomina.salario,
+            id: empleado.id
+        };
+    }
 };
 
 
+// Usamos las funciones async pero aqui no manejamos los then y catch
 let getInformation = async( id ) => {
     let empleado = await getEmpleado(id);
     let nomina = await getSalario(empleado);
