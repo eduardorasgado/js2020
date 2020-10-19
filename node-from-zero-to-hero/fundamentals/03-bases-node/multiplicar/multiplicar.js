@@ -1,21 +1,25 @@
 const fs = require("fs");
 
-const crearArchivo = async ( base ) => {
-    let data = '';
+const crearArchivo = ( base ) => {
+    return new Promise( ( resolve, reject ) => {
+        let data = '';
 
-    for(let i = 1; i <= 10; i++) {
-        data += `${base} * ${i} = ${base * i}\n`;
-    };
+        for(let i = 1; i <= 10; i++) {
+            data += `${base} * ${i} = ${base * i}\n`;
+        };
 
 
-    let location = `tablas/`;
-    let fileName = `tabla-${base}.txt`;
+        let location = `tablas/`;
+        let fileName = `tabla-${base}.txt`;
 
-    // guardando la tabla de base en el fichero del sistema
-    fs.writeFile(location+fileName, data, (err) => {
-        if(err) throw new Error("No se pudo crear el archivo.");
-        console.log(`El archivo ${fileName} ha sido creado y guardado`);
+        // guardando la tabla de base en el fichero del sistema
+        fs.writeFile(location+fileName, data, (err) => {
+            if(err) reject("No se pudo crear el archivo.");
+            else resolve(fileName);
+        });
     });
 }
 
-exports.crearArchivo = crearArchivo;
+module.exports = {
+    crearArchivo
+}
