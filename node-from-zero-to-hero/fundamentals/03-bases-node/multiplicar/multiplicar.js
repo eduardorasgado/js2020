@@ -1,10 +1,10 @@
 const fs = require("fs");
 
-const crearArchivo = ( base ) => {
+const crearArchivo = ( base, limite ) => {
     return new Promise( ( resolve, reject ) => {
         let data = '';
 
-        for(let i = 1; i <= 10; i++) {
+        for(let i = 1; i <= limite; i++) {
             data += `${base} * ${i} = ${base * i}\n`;
         };
 

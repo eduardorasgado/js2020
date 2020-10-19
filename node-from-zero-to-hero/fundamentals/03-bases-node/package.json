@@ -22,5 +22,6 @@
   "homepage": "https://github.com/eduardorasgado/js2020#readme",
   "dependencies": {
     "yargs": "^16.1.0"
-  }
+  },
+  "devDependencies": {}
 }
