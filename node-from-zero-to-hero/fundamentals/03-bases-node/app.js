@@ -14,15 +14,25 @@ let argv2 = process.argv;
 argvModule.command('listar', 'Imprime en consola la tabla de multiplicar', {
     base: {
         demand: true,
-        describe: "La base de la tabla que deseas obtener e.g: --base:5" 
+        describe: "La base de la tabla que deseas obtener e.g: --base=9",
+        alias:'b'
+    },
+    limite: {
+        demand: false,
+        describe: "Limite superior de la tabla requerida, e.g: --limite=5",
+        alias: 'l'
     }
 });
+
 let argv = argvModule.argv;
+
 console.log(argv);
 
+let limite = 10;
+if(argv.limite) limite = argv.limite; 
 
 // utilizando el modulo que creamos en el folder multiplicar
-crearArchivo(argv.base, argv.limite)
+crearArchivo(argv.base, limite)
     .then( archivo => {
         console.log(`Se ha creado el archivo de nombre: ${archivo}`)
     })
