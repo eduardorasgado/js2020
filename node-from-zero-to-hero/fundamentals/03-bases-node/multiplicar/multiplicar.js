@@ -10,7 +10,7 @@ const createTabla = (base, limite) => {
     return data;
 };
 
-const listarTabla = (base, limite) => {
+const listarTabla = (base, limite = 10) => {
     return new Promise( (resolve, reject) => {
         if(!Number(base) || !Number(limite)){
             reject(noBase);
@@ -20,7 +20,7 @@ const listarTabla = (base, limite) => {
     } );
 };
 
-const crearArchivo = ( base, limite ) => {
+const crearArchivo = ( base, limite = 10 ) => {
     return new Promise( ( resolve, reject ) => {
         if(!Number(base) || !Number(limite)) {
             reject(noBase);
@@ -29,7 +29,7 @@ const crearArchivo = ( base, limite ) => {
         let data = createTabla(base, limite);
 
         let location = `tablas/`;
-        let fileName = `tabla-${base}.txt`;
+        let fileName = `tabla-${base}-limite-${limite}.txt`;
 
         // guardando la tabla de base en el fichero del sistema
         fs.writeFile(location+fileName, data, (err) => {
