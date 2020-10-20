@@ -1,13 +1,32 @@
 const fs = require("fs");
 
+const noBase = "No hay base o la base/limite no son/es un numero";
+
+const createTabla = (base, limite) => {
+    let data = '';
+    for(let i = 1; i <= limite; i++) {
+        data += `${base} * ${i} = ${base * i}\n`;
+    };
+    return data;
+};
+
+const listarTabla = (base, limite) => {
+    return new Promise( (resolve, reject) => {
+        if(!Number(base) || !Number(limite)){
+            reject(noBase);
+            return;
+        }
+       else  resolve(createTabla(base, limite));
+    } );
+};
+
 const crearArchivo = ( base, limite ) => {
     return new Promise( ( resolve, reject ) => {
-        let data = '';
-
-        for(let i = 1; i <= limite; i++) {
-            data += `${base} * ${i} = ${base * i}\n`;
-        };
-
+        if(!Number(base) || !Number(limite)) {
+            reject(noBase);
+            return;
+        }
+        let data = createTabla(base, limite);
 
         let location = `tablas/`;
         let fileName = `tabla-${base}.txt`;
@@ -18,8 +37,9 @@ const crearArchivo = ( base, limite ) => {
             else resolve(fileName);
         });
     });
-}
+};
 
 module.exports = {
-    crearArchivo
-}
+    crearArchivo,
+    listarTabla
+};
