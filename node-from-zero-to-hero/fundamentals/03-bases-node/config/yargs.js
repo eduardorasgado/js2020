@@ -25,8 +25,11 @@ argvModule
     .command('listar', 'Imprime en consola la tabla de multiplicar', 
     requirements)
     .command('crear', 'Guarda la tabla de multiplicar en un archivo permanente', 
-    requirements);
+    requirements)
+    .help();
+
+const argv = argvModule.argv;
 
 module.exports = {
-    argvModule
+    argv    
 }

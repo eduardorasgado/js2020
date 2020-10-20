@@ -1,7 +1,5 @@
 const { crearArchivo, listarTabla } = require("./multiplicar/multiplicar");
-const { argvModule } = require('./config/yargs');
-
-let argv = argvModule.help().argv;
+const { argv } = require('./config/yargs');
 
 
 switch(argv._[0]) {
