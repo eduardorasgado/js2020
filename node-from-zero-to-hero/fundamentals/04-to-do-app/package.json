@@ -1,0 +1,27 @@
+{
+  "name": "04-to-do-app",
+  "version": "0.0.1",
+  "description": "Aplicacion de consola para recordar tus deberes como programador",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardorasgado/js2020.git"
+  },
+  "keywords": [
+    "consola",
+    "todo"
+  ],
+  "author": "Eduardo Rasgado Ruiz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eduardorasgado/js2020/issues"
+  },
+  "homepage": "https://github.com/eduardorasgado/js2020#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^16.1.0"
+  }
+}
