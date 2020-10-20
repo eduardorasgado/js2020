@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/eduardorasgado/js2020#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "yargs": "^16.1.0"
   },
   "devDependencies": {}
