@@ -13,10 +13,14 @@ let command = argv.argv._[0];
 // node app listar
 // node app actualizar -d "Pasear a Solovino" -c true
 
+// Llenando la lista de las actividades persistentes
+api.arranque();
+
 const handlingCrear = async(d) => {
     let result = await api.crear(d)
     return result;
 };
+
 switch(command) {
     case "crear":
         handlingCrear(argv.argv.descripcion)
