@@ -78,7 +78,48 @@ const listar = () => {
     }
 }
 
+/**
+ * Actualiza el estado de una tarea especifica o solo actualiza su contenido
+ * @param {*} id 
+ * @param {*} descripcion 
+ */
+const actualizarElemento = (id, descripcion) => {
+    cargarDB();
+    let message = '';
+    let tarea = {};
+    let isNotUpdated = tareasPorHacer.every( tarea => {
+        if(id === tarea.id) {
+            // caso: solo actualizar el estado a completado
+            if(descripcion === '') {
+                tarea.completado = true;
+                message = 'La tarea ha sido completada. Puedes reiniciar para eliminar este elemento';
+            } else {
+                // caso: actualizar solamente la descripcion de la tarea
+                tarea.descripcion = descripcion;
+                message = 'La descripcion de la tarea ha sido actualizada';
+            }
+            guardarDB();
+            return false;
+        } 
+        return true;
+    })
+    
+    if(!isNotUpdated) {
+        return {
+            error: false,
+            message,
+            data: tarea
+        }
+    } 
+    return {
+        error: true,
+        message: 'La tarea no pudo ser actualizada, No existe el id en la lista.',
+        data: null
+    }
+}
+
 module.exports = {
     crear,
-    listar
+    listar,
+    actualizarElemento
 }

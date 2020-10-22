@@ -23,6 +23,7 @@ const argv = yargs
             'solo se cambia la descripcion de una tarea ya creada. De otro modo, ocurre lo mencionado',
             alias: 'd',
             type: 'string',
+            default: ''
         }
     })
     .command('reiniciar', 'Limpiar las tareas terminadas', {
