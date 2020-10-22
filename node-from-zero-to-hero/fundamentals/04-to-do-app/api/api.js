@@ -91,6 +91,10 @@ const actualizarElemento = (id, descripcion) => {
         if(id === tarea.id) {
             // caso: solo actualizar el estado a completado
             if(descripcion === '') {
+                if(tarea.completado) {
+                    // se intenta actualizar una tarea finalizada
+                    return false;
+                }
                 tarea.completado = true;
                 message = 'La tarea ha sido completada. Puedes reiniciar para eliminar este elemento';
             } else {
@@ -105,10 +109,19 @@ const actualizarElemento = (id, descripcion) => {
     })
     
     if(!isNotUpdated) {
-        return {
-            error: false,
-            message,
-            data: tarea
+        // manejo de la sobreescritura de la tarea anteriormente actualizada
+        if(message === '') {
+            return {
+                error: true,
+                message: 'La tarea no se actualizo porque ya esta finalizada',
+                data: null
+            }
+        } else {
+            return {
+                error: false,
+                message,
+                data: tarea
+            }
         }
     } 
     return {

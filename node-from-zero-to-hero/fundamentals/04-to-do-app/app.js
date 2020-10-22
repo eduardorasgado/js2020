@@ -8,7 +8,7 @@ if(argv.argv._[0] == undefined) {
     return;
 }
 let command = argv.argv._[0];
-console.log(argv.argv);
+//console.log(argv.argv);
 // Creacion de tareas por hacer
 // node app crear -d "Pasear a Solovino"
 // node app listar
@@ -22,7 +22,6 @@ switch(command) {
         } else {
             console.info(response.message)
         }
-        
         break;
     case "listar":
         console.log('[TODAS LAS TAREAS]');
@@ -44,7 +43,7 @@ switch(command) {
         console.log("[ACTUALIZANDO UNA TAREA]");
         response = api.actualizarElemento(argv.argv.numero, argv.argv.descripcion)
         if(response.error) {
-            console.error(response.message);
+            console.error("ERROR: "+ response.message);
         } else { 
             console.info(response.message);
         }
