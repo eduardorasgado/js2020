@@ -2,20 +2,34 @@ const fs = require('fs');
 
 let tareasPorHacer = [];
 
+/**
+ * Guardar una nueva tarea en la db
+ */
 const guardarDB = () => {
     
     let data = JSON.stringify(tareasPorHacer);
     fs.writeFile('db/data.json', data, (err) => {
-        if(err) throw new Error("No se pudo grabar", err);
+        if(err) throw new Error("No se pudo grabar", err.message);
     });
 }
 
-// TODO: Cuando no hay nada en data, presenta un error;
+/**
+ * Cargando los archivos de la db
+ * Si no hay, no carga nada
+ */
 const cargarDB = () => {
-    tareasPorHacer = require('../db/data.json');
+    try {
+        tareasPorHacer = require('../db/data.json');
+    } catch(error) {
+        return;
+    }
     
 }
 
+/**
+ * Agrega una nueva tarea a la db sin borrar los elementos previamente guardados
+ * @param descripcion La descripcion de la tarea a guardar, 
+ */
 const crear = (descripcion) => {
 
     cargarDB();
@@ -43,10 +57,11 @@ const crear = (descripcion) => {
     };
 };
 
+/**
+ * Cargar las tareas de la db y devuelve un string con una lista de estas para imprimir
+ */
 const listar = () => {
     cargarDB();
-    
-    let tareas = 'Numero Estado    Tarea\n';
 
     if(tareasPorHacer.length == 0) {
         return {
@@ -55,14 +70,10 @@ const listar = () => {
             data: null
         };
     } else {
-        tareasPorHacer.forEach(tarea => {
-            tareas += `${tarea.id}       ${tarea.completado} -> ${tarea.descripcion} \n`;
-        });
-
         return {
             error: false,
             message: 'Todas las tareas han sido recopiladas con exito.',
-            data: tareas
+            data: tareasPorHacer
         }
     }
 }

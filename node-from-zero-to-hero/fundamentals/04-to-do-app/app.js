@@ -30,7 +30,14 @@ switch(command) {
         if(response.error) {
             console.error(response.message);
         } else {
-            console.info(response.data)
+            console.log("\n=======TAREAS POR HACER=======");
+            console.log('Numero Estado    Tarea\n');
+            let estadoTarea = '';
+            for(let tarea of response.data) {
+                estadoTarea = tarea.completado ? 'Finalizada' : 'Pendiente';
+                console.log(`${tarea.id}       ${estadoTarea} -> ${tarea.descripcion} \n`);
+                console.log("----------------------------------------------");
+            }
         }
         break;
     case "actualizar":
