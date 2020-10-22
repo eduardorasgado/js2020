@@ -131,8 +131,39 @@ const actualizarElemento = (id, descripcion) => {
     }
 }
 
+/**
+ * Eliminar un elemento definido de la lista de tareas de la db
+ * @param {*} id 
+ */
+const borrarElemento = (id) => {
+    cargarDB();
+    let isDeleted = false;
+    // Si fuese una gran cantidad de datos seria ineficiente
+    // TODO: Buscar una manera mas eficiente de eliminar un elemento
+    tareasPorHacer = tareasPorHacer.filter(tarea => {
+        let stays = tarea.id !== id
+        if(!stays) isDeleted =  true;
+        return stays;
+    });
+    if(isDeleted) {
+        guardarDB();
+        return {
+            error: false,
+            message: 'La tarea fue eliminada con exito',
+            data: null // seria buena idea devolver el dato eliminado
+        }
+    } else {
+        return {
+            error: true,
+            message: 'No existe un elemento con el id indicado',
+            data: null
+        }
+    }
+}
+
 module.exports = {
     crear,
     listar,
-    actualizarElemento
+    actualizarElemento,
+    borrarElemento,
 }

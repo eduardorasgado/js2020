@@ -13,7 +13,7 @@ const argv = yargs
     .command('actualizar', 'Marcar una tarea', {
         numero: {
             demand: true,
-            describe: 'El id del mensaje que deseas eliminar',
+            describe: 'El id del mensaje que deseas actualizar',
             alias: 'n',
             type: 'number'
         },
@@ -32,6 +32,14 @@ const argv = yargs
             describe: 'Se eliminan todas las tareas, incluyendo las no concluidas. Nota: Solo incluya la bandera.',
             alias: 'a',
             default: false
+        }
+    })
+    .command('borrar', 'Eliminar una tarea especifica de la lista', {
+        numero: {
+            demand: true,
+            describe: 'El numero de la tarea a eliminar',
+            alias: 'n',
+            type: 'number'
         }
     }).help();
 

@@ -23,6 +23,7 @@ switch(command) {
             console.info(response.message)
         }
         break;
+
     case "listar":
         console.log('[TODAS LAS TAREAS]');
         response = api.listar();
@@ -39,6 +40,7 @@ switch(command) {
             }
         }
         break;
+
     case "actualizar":
         console.log("[ACTUALIZANDO UNA TAREA]");
         response = api.actualizarElemento(argv.argv.numero, argv.argv.descripcion)
@@ -51,6 +53,17 @@ switch(command) {
     case "reiniciar":
         console.log("Reinicia la lista, pero deja las tareas que no se han hecho");
         break;
+
+    case "borrar":
+        console.log('[Eliminando un elemento de la lista]');
+        response = api.borrarElemento(argv.argv.numero);
+        if(response.error) {
+            console.error("ERROR: " + response.message);
+        } else {
+            console.log(response.message);
+        }
+        break;
+
     default:
         console.log("Comando Invalido");
 };
