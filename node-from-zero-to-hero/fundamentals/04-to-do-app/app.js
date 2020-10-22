@@ -1,10 +1,17 @@
-const argv = require('yargs').argv;
+const { argv } = require('./config/yargs');
 
-console.log(argv);
 
-let command = argv._[0];
-console.log(command);
+if(argv.argv._[0] == undefined) {
+    console.log('[Introduzca un comando]');
+    argv.showHelp();
+    return;
+}
+let command = argv.argv._[0];
 
+// Creacion de tareas por hacer
+// node app crear -d "Pasear a Solovino"
+// node app listar
+// node app actualizar -d "Pasear a Solovino" -c true
 switch(command) {
     case "crear":
         console.log("Creando una nueva tarea por hacer");
@@ -15,11 +22,10 @@ switch(command) {
     case "actualizar":
         console.log("Actualizando una tarea como 'hecha'");
         break;
+    case "reiniciar":
+        console.log("Reinicia la lista, pero deja las tareas que no se han hecho");
+        break;
     default:
         console.log("Comando Invalido");
 }
 
-// Creacion de tareas por hacer
-// node app crear -d "Pasear a Solovino"
-// node app listar
-// node app actualizar -d "Pasear a Solovino" -c true
