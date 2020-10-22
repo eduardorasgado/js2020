@@ -1,5 +1,5 @@
 const { argv } = require('./config/yargs');
-
+const api = require('./api/api');
 
 if(argv.argv._[0] == undefined) {
     console.log('[Introduzca un comando]');
@@ -7,14 +7,23 @@ if(argv.argv._[0] == undefined) {
     return;
 }
 let command = argv.argv._[0];
-
+//console.log(argv.argv);
 // Creacion de tareas por hacer
 // node app crear -d "Pasear a Solovino"
 // node app listar
 // node app actualizar -d "Pasear a Solovino" -c true
+
+const handlingCrear = async(d) => {
+    let result = await api.crear(d)
+    return result;
+};
 switch(command) {
     case "crear":
-        console.log("Creando una nueva tarea por hacer");
+        handlingCrear(argv.argv.descripcion)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(e => {console.log('ERROR: ', e);});
         break;
     case "listar":
         console.log("Listando todas las tareas registradas hasta el momento");
@@ -27,5 +36,4 @@ switch(command) {
         break;
     default:
         console.log("Comando Invalido");
-}
-
+};

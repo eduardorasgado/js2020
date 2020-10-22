@@ -30,6 +30,7 @@ const argv = yargs
             demand: false,
             describe: 'Se eliminan todas las tareas, incluyendo las no concluidas. Nota: Solo incluya la bandera.',
             alias: 'a',
+            default: false
         }
     }).help();
 
